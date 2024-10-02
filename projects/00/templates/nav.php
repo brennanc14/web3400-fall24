@@ -9,7 +9,7 @@
                 <span class="icon">
                     <i class="fas fa-cat"></i>
                 </span>
-                <span>&nbsp;<?= $siteName ?></span>
+                <span>&nbsp; <?= $siteName ?></span>
             </span>
         </a>
         <a class="navbar-burger" role="button" aria-label="menu" aria-expanded="false">
