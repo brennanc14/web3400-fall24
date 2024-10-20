@@ -3,13 +3,43 @@
 include 'config.php';
 // Step 2: Secure and only allow 'admin' users to access this page
 if (!isset($_SESSION['loggedin']) || $_SESSION['user_role'] !== 'admin') {
-    // Redirect user to login page or display an error message
-    $_SESSION['messages'][] = "You must be an administrator to access that resource.";
+       // Error message for non admins and redirects
+    $_SESSION['messages'][] = "You must be an admin to access this page.";
     header('Location: login.php');
     exit;
 }
 /* Step 3: You can use your completed `register.php` page as a guide for this page. However, you must remove the unused fields from the form handler and add a handler for the user role field; if the email already exists, redirect back to `user_add.php`, displaying the message "That email already exists. Please choose another." You must also update the SQL INSERT statement, and when the record is successfully created, redirect back to the `users_manage.php` page with the message "The user account for $full_name was created. They will need to login to activate their account."
 */
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Extract, sanitize user input, and assign data to their respective variables
+    $full_name = htmlspecialchars($_POST['full_name']);
+    $email = $_POST['email'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Encrypts the password by hashing
+    $phone = htmlspecialchars($_POST['phone']);
+    $role = htmlspecialchars($_POST['role']);
+
+    // Email checker from register.php
+    $stmt = $pdo->prepare("SELECT * FROM `users` WHERE `email` = ?");
+    $stmt->execute([$email]);
+    $userExists = $stmt->fetch();
+
+    if ($userExists) {
+        // If the email exists they have to try again
+        $_SESSION['messages'][] = "That email is already in use, please enter a different email.";
+        header('Location: user_add.php');
+        exit;
+    } 
+    else {
+        // If the email does not exist it will be input into the database
+        $insertStmt = $pdo->prepare("INSERT INTO `users`(`full_name`, `email`, `pass_hash`, `phone`, `role`) VALUES (?, ?, ?, ?, ?)");
+        $insertStmt->execute([$full_name, $email, $password, $phone, $role]);
+
+        // Account was created, prompts user to login
+        $_SESSION['messages'][] = "The user account for $full_name was created. They will need to login to activate their account.";
+        header('Location: users_manage.php');
+        exit;
+    }
+}
 ?>
 
 <?php include 'templates/head.php'; ?>
