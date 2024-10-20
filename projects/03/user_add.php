@@ -3,9 +3,11 @@
 include 'config.php';
 // Step 2: Secure and only allow 'admin' users to access this page
 if (!isset($_SESSION['loggedin']) || $_SESSION['user_role'] !== 'admin') {
-       // Error message for non admins and redirects
+    
+    // Error message for non admins and redirects
     $_SESSION['messages'][] = "You must be an admin to access this page.";
     header('Location: login.php');
+   
     exit;
 }
 /* Step 3: You can use your completed `register.php` page as a guide for this page. However, you must remove the unused fields from the form handler and add a handler for the user role field; if the email already exists, redirect back to `user_add.php`, displaying the message "That email already exists. Please choose another." You must also update the SQL INSERT statement, and when the record is successfully created, redirect back to the `users_manage.php` page with the message "The user account for $full_name was created. They will need to login to activate their account."

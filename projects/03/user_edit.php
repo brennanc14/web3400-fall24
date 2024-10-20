@@ -3,9 +3,11 @@
 include 'config.php';
 // Step 2: Secure and only allow 'admin' users to access this page
 if (!isset($_SESSION['loggedin']) || $_SESSION['user_role'] !== 'admin') {
+    
     // Error message for non admins and redirects
     $_SESSION['messages'][] = "You must be an admin to access this page.";
     header('Location: login.php');
+    
     exit;
 }
 // Step 3: Check if the update form was submitted. If so, update user details. Similar steps as in user_add.php but with an UPDATE SQL query
