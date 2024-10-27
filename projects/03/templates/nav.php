@@ -22,13 +22,6 @@
         <div class="navbar-start">
             <a class="navbar-item" href="#">Home</a>
             <a class="navbar-item" href="#">About</a>
-
-        </div>
-        <div class="navbar-end">
-            <div class="navbar-item">
-                <div class="buttons">
-                    <a href="contact.php" class="button is-light">Contact us</a>
- 
 <!-- BEGIN ADMIN MENU -->
 <?php if (isset($_SESSION['loggedin']) && $_SESSION['user_role'] == 'admin') : ?>
                 <div class="navbar-item has-dropdown is-hoverable">
@@ -39,13 +32,17 @@
                 <span>Admin</span>
                 </a>
                     <div class="navbar-dropdown">
-                    <a href="users_manage.php" class="navbar-item">
-                    Manage Users
-                    </a>
+                    <a href="users_manage.php" class="navbar-item">Manage Users</a>
                     </div>
                 </div>
-            <?php endif; ?>
+        <?php endif; 
+?>
 <!-- END ADMIN MENU -->
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="buttons">
+                    <a href="contact.php" class="button is-light">Contact us</a>
  
 <!-- BEGIN USER MENU -->
    <?php if (isset($_SESSION['loggedin'])) : ?>
