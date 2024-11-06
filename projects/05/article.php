@@ -32,7 +32,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <article class="media">
             <figure class="media-left">
                 <p class="image is-128x128">
-                    <img src="https://source.unsplash.com/random/128x128/?wellness">
+                    <img src="https://picsum.photos/320">
                 </p>
             </figure>
             <div class="media-content">
@@ -55,7 +55,7 @@ $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         <span class="icon">
                             <i class="fas fa-lg fa-hiking"></i>
                         </span>
-                        <span><strong>Begin your journey now</strong></span>
+                        <span><strong>Walk the path of the cat today</strong></span>
                     </a>
                 </p>
                 <p class="buttons">
