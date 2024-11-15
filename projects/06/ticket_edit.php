@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['title'], $_POST['desc
     $stmt->execute([$title, $description, $priority, $ticket_id]);
 
     // Redirect back to the ticket page after updating the ticket
-    header("Location: ticket_detail.php?id=$ticket_id");
+    header("Location: tickets.php?id=$ticket_id");
     exit;
 }
 // Else, it's an initial page request; fetch the ticket record from the database where the ticket = $_GET['id']
