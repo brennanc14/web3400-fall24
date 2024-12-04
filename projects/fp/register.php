@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($userExists) {
         // Email already exists, prompt the user to choose another
         $_SESSION['messages'][] = "That email already exists. Please choose another or reset your passowrd";
-        header('Location: register.php');
+        
         exit;
     } else {
         //Email is unique, proceed with inserting the new user record
